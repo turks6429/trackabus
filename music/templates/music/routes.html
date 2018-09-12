@@ -1,0 +1,65 @@
+{% extends 'music/base.html' %}
+{% block title %}Routes{% endblock %}
+{% block routes_active %}active{% endblock %}
+
+
+
+{% block body %}
+<div class="container-fluid songs-container">
+
+    <div class="row">
+
+        <!-- Left Album Info -->
+        <div class="col-sm-4 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h1>{{ song.song_title }} <small>{{ song.song_title }}</small></h1>
+                    <h2>{{ song.song_title }}</h2>
+                </div>
+            </div>
+        </div>
+        <!-- Right Song Info -->
+        <div class="col-sm-8 col-md-9">
+
+            <ul class="nav nav-pills" style="margin-bottom: 10px;">
+                <li role="presentation" class="active"><a href="{% url 'music:routes' song.id %}">View All</a></li>
+
+            </ul>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <h3>All Routes</h3>
+
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Price</th>
+                            <th>Map</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for ruta in song.ruta_set.all %}
+                            <tr>
+                                <td>{{ ruta.ruta_name }}</td>
+                                <td>{{ ruta.ruta_price }}</td>
+                                <td><iframe src="{{ ruta.ruta_map }}" width="640" height="480"></iframe></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
